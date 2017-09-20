@@ -361,8 +361,8 @@ function joinWarmUp() {
   chaincode_name=$3
 
   joinChannel ${org} ${channel_name}
-  sleep 7
-  warmUpChaincode ${org} ${channel_name} ${chaincode_name}
+  #sleep 7
+  #warmUpChaincode ${org} ${channel_name} ${chaincode_name}
 }
 
 function createJoinInstantiateWarmUp() {
@@ -374,8 +374,8 @@ function createJoinInstantiateWarmUp() {
   createChannel ${org} ${channel_name}
   joinChannel ${org} ${channel_name}
   instantiateChaincode ${org} ${channel_name} ${chaincode_name} ${chaincode_init}
-  sleep 7
-  warmUpChaincode ${org} ${channel_name} ${chaincode_name}
+  #sleep 7
+  #warmUpChaincode ${org} ${channel_name} ${chaincode_name}
 }
 
 function makeCertDirs() {
@@ -493,19 +493,19 @@ function devNetworkDown () {
 }
 
 function devInstall () {
-  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode install -p relationship -n mycc -v 0"
+  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode install -p car -n mycc -v 0"
 }
 
 function devInstantiate () {
-  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode instantiate -n mycc -v 0 -C myc -c '{\"Args\":[\"init\",\"a\",\"10\",\"b\",\"100\"]}'"
+  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode instantiate -n mycc -v 0 -C myc -c '{\"Args\":[\"init\"]}'"
 }
 
 function devInvoke () {
-  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode invoke -n mycc -v 0 -C myc -c '{\"Args\":[\"move\",\"a\",\"b\",\"10\"]}'"
+  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode invoke -n mycc -v 0 -C myc -c '{\"Args\":[\"setMaker\",\"1000\",\"engine\",\"rr\"]}'"
 }
 
 function devQuery () {
-  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode query -n mycc -v 0 -C myc -c '{\"Args\":[\"query\",\"a\"]}'"
+  docker-compose -f ${COMPOSE_FILE_DEV} run cli bash -c "peer chaincode query -n mycc -v 0 -C myc -c '{\"Args\":[\"query\"]}'"
 }
 
 function info() {
@@ -533,7 +533,7 @@ function clean() {
 }
 
 function generateWait() {
-  echo "$(date --rfc-3339='seconds' -u) *** Wait for 7 minutes to make sure the certificates become active ***"
+  echo "waiting for 7 minutes to make sure the certificates become active"
   sleep 7m
 }
 

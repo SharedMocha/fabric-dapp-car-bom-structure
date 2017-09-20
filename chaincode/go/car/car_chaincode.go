@@ -212,7 +212,9 @@ func getOrganization(certificate []byte) string {
 	organization := cert.Issuer.Organization[0]
 	logger.Info("getOrganization: " + organization)
 
-	return organization
+	ret := strings.Split(organization, ".")[0]
+
+	return ret
 }
 
 func main() {
