@@ -36,12 +36,10 @@ DEFAULT_PEER0_EVENT_PORT=7053
 DEFAULT_PEER1_PORT=7056
 DEFAULT_PEER1_EVENT_PORT=7058
 
-DEFAULT_ORDERER_EXTRA_HOSTS="extra_hosts:[newline]      - peer0.$ORG1.$DOMAIN:$IP1[newline]      - peer0.$ORG2.$DOMAIN:$IP2[newline]      - peer0.$ORG3.$DOMAIN:$IP3"
+DEFAULT_ORDERER_EXTRA_HOSTS="extra_hosts:[newline]      - peer0.$ORG1.$DOMAIN:$IP1[newline]      - peer0.$ORG2.$DOMAIN:$IP2[newline]      - peer0.$ORG4.$DOMAIN:$IP4[newline]      - peer0.$ORG5.$DOMAIN:$IP5[newline]      - peer0.$ORG5.$DOMAIN:$IP5"
 DEFAULT_PEER_EXTRA_HOSTS="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER"
-DEFAULT_CLI_EXTRA_HOSTS="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - www.$DOMAIN:$IP_ORDERER[newline]      - www.$ORG1.$DOMAIN:$IP1[newline]      - www.$ORG2.$DOMAIN:$IP2[newline]      - www.$ORG3.$DOMAIN:$IP3"
-DEFAULT_API_EXTRA_HOSTS1="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - peer0.$ORG2.$DOMAIN:$IP2[newline]      - peer0.$ORG3.$DOMAIN:$IP3"
-DEFAULT_API_EXTRA_HOSTS2="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - peer0.$ORG1.$DOMAIN:$IP1[newline]      - peer0.$ORG3.$DOMAIN:$IP3"
-DEFAULT_API_EXTRA_HOSTS3="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - peer0.$ORG1.$DOMAIN:$IP1[newline]      - peer0.$ORG2.$DOMAIN:$IP2"
+DEFAULT_CLI_EXTRA_HOSTS="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - www.$DOMAIN:$IP_ORDERER[newline]      - www.$ORG1.$DOMAIN:$IP1[newline]      - www.$ORG2.$DOMAIN:$IP2[newline]      - www.$ORG3.$DOMAIN:$IP3[newline]      - www.$ORG4.$DOMAIN:$IP4[newline]      - www.$ORG5.$DOMAIN:$IP5"
+DEFAULT_API_EXTRA_HOSTS="extra_hosts:[newline]      - orderer.$DOMAIN:$IP_ORDERER[newline]      - peer0.$ORG1.$DOMAIN:$IP1[newline]      - peer0.$ORG2.$DOMAIN:$IP2[newline]      - peer0.$ORG3.$DOMAIN:$IP3[newline]      - peer0.$ORG4.$DOMAIN:$IP4[newline]      - peer0.$ORG5.$DOMAIN:$IP5"
 
 GID=$(id -g)
 
@@ -144,13 +142,7 @@ function generatePeerArtifacts() {
       # if no port args are passed assume generating for multi host deployment
       peer_extra_hosts=${DEFAULT_PEER_EXTRA_HOSTS}
       cli_extra_hosts=${DEFAULT_CLI_EXTRA_HOSTS}
-      if [ ${org} == ${ORG1} ]; then
-        api_extra_hosts=${DEFAULT_API_EXTRA_HOSTS1}
-      elif [ ${org} == ${ORG2} ]; then
-        api_extra_hosts=${DEFAULT_API_EXTRA_HOSTS2}
-      elif [ ${org} == ${ORG3} ]; then
-        api_extra_hosts=${DEFAULT_API_EXTRA_HOSTS3}
-      fi
+      api_extra_hosts=${DEFAULT_API_EXTRA_HOSTS}
     fi
 
     api_port=$2
