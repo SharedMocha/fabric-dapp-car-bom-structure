@@ -21,8 +21,8 @@ CLI_TIMEOUT=10000
 COMPOSE_TEMPLATE=ledger/docker-composetemplate.yaml
 COMPOSE_FILE_DEV=ledger/docker-composedev.yaml
 
-CHAINCODE_COMMON_NAME=car
-CHAINCODE_BILATERAL_NAME=auction
+CHAINCODE_COMMON_NAME=AuditRequest
+CHAINCODE_BILATERAL_NAME=AuditorSelection
 CHAINCODE_COMMON_INIT='{"Args":["init"]}'
 CHAINCODE_BILATERAL_INIT='{"Args":["init","a","100","b","100"]}'
 CHAINCODE_WARMUP_QUERY='{\"Args\":[\"query\"]}'
