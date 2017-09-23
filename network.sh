@@ -3,13 +3,13 @@
 starttime=$(date +%s)
 
 # defaults; export these variables before executing this script
-: ${DOMAIN:="audit-chain.com"}
+: ${DOMAIN:="decentralized-supply.com"}
 : ${IP_ORDERER:="54.234.201.67"}
-: ${ORG1:="EICC"}
-: ${ORG2:="EICC-India"}
-: ${ORG3:="Foxconn"}
-: ${ORG4:="EICC-China"}
-: ${ORG5:="Cisco"}
+: ${ORG1:="factory"}
+: ${ORG2:="ferrari"}
+: ${ORG3:="gm"}
+: ${ORG4:="rr"}
+: ${ORG5:="dealer"}
 : ${IP1:="54.86.191.160"}
 : ${IP2:="54.243.0.168"}
 : ${IP3:="54.211.142.174"}
