@@ -21,14 +21,14 @@ type Part struct {
 }
 
 type Car struct {
-	Vin 			string 				`json:"vin"`
+	Type 			string 				`json:"type"`
 	Engine 			Part 				`json:"engine"`
 	Body 			Part 				`json:"body"`
 }
 
 var logger = shim.NewLogger("CarChaincode")
 
-const indexName = `Car`
+const indexName = `Audit`
 
 func (t *CarChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Success(nil)
@@ -50,14 +50,14 @@ func (t *CarChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
 }
 
 func (t *CarChaincode) order(stub shim.ChaincodeStubInterface, args []string) pb.Response {
-	vin := args[0]
+	type := args[0]
 
-	value, err := json.Marshal(Car{Vin:vin})
+	value, err := json.Marshal(Car{Type:type})
 	if err != nil {
 		return shim.Error("cannot marshal")
 	}
 
-	key, err := stub.CreateCompositeKey(indexName, []string{vin})
+	key, err := stub.CreateCompositeKey(indexName, []string{type})
 	if err != nil {
 		return shim.Error("cannot create composite key")
 	}
@@ -78,11 +78,11 @@ func (t *CarChaincode) setMaker(stub shim.ChaincodeStubInterface, args []string)
 		return pb.Response{Message:"only factory authorized to call setMaker", Status:401}
 	}
 
-	vin := args[0]
+	type := args[0]
 	part := args[1]
 	maker := args[2]
 
-	car, err := getCar(stub, vin)
+	car, err := getCar(stub, type)
 	if err != nil {
 		return shim.Error("cannot get car")
 	}
@@ -109,11 +109,11 @@ func (t *CarChaincode) supply(stub shim.ChaincodeStubInterface, args []string) p
 		return pb.Response{Message:"only supplier authorized to call supply", Status:401}
 	}
 
-	vin := args[0]
+	type := args[0]
 	part := args[1]
 	id := args[2]
 
-	car, err := getCar(stub, vin)
+	car, err := getCar(stub, type)
 	if err != nil {
 		return shim.Error("cannot get car")
 	}
@@ -166,8 +166,8 @@ func (t *CarChaincode) query(stub shim.ChaincodeStubInterface, args []string) pb
 	return shim.Success(ret)
 }
 
-func getCar(stub shim.ChaincodeStubInterface, vin string) (Car, error) {
-	key, err := stub.CreateCompositeKey(indexName, []string{vin})
+func getCar(stub shim.ChaincodeStubInterface, type string) (Car, error) {
+	key, err := stub.CreateCompositeKey(indexName, []string{type})
 	if err != nil {
 		return Car{}, err
 	}
@@ -187,7 +187,7 @@ func getCar(stub shim.ChaincodeStubInterface, vin string) (Car, error) {
 }
 
 func putCar(stub shim.ChaincodeStubInterface, car Car) error {
-	key, err := stub.CreateCompositeKey(indexName, []string{car.Vin})
+	key, err := stub.CreateCompositeKey(indexName, []string{car.Type})
 	if err != nil {
 		return err
 	}
