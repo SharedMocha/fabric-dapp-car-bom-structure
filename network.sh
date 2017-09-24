@@ -702,7 +702,7 @@ elif [ "${MODE}" == "generate" ]; then
 
   generateOrdererDockerCompose
   generateOrdererArtifacts
-  #generateWait
+  generateWait
 elif [ "${MODE}" == "generate-orderer" ]; then
   generateOrdererDockerCompose
   downloadArtifactsOrderer
