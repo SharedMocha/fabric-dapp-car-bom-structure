@@ -28,7 +28,7 @@ type Car struct {
 
 var logger = shim.NewLogger("CarChaincode")
 
-const indexName = `Audit`
+const indexName = `Car`
 
 func (t *CarChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 	return shim.Success(nil)
