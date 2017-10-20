@@ -1,6 +1,6 @@
-# Fabric Application for Hyperledger Fabric 1.0 which create virtual car object to track build of material from various suppliers.
+# Fabric Application for Hyperledger Fabric 1.0 which creates virtual car object to track build of material from various suppliers.
 
-# Below app can be used to used to build BOm structures for Car,Flight,Shipemnts -Change the orgs,channels and write new chain code to get started
+# Below app can be used to used to build Bom structures for Car,Flight,Shipemnts -Change the orgs,channels and write new chain code to get started
 
 
 The network can be deployed to multiple docker containers on one host for development or to multiple hosts for testing 
